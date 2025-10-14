@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stitch Design</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#38e07b",
+              "background-light": "#f6f8f7",
+              "background-dark": "#122017",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+            borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          },
+        },
+      };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-zinc-900 dark:text-zinc-200">
+<div class="flex min-h-screen w-full flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-zinc-200/50 dark:border-zinc-800/50 px-4 sm:px-6 lg:px-8 py-3">
+<div class="flex items-center gap-3">
+<div class="h-6 w-6 text-zinc-900 dark:text-zinc-200">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_319)">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</g>
+<defs>
+<clipPath id="clip0_6_319"><rect fill="white" height="48" width="48"></rect></clipPath>
+</defs>
+</svg>
+</div>
+<h1 class="text-lg font-bold">Bundler</h1>
+</div>
+<button class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-zinc-200/50 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-200">
+<svg fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+</svg>
+</button>
+</header>
+<main class="flex flex-1 justify-center p-4 sm:p-6 lg:p-8">
+<div class="w-full max-w-2xl space-y-6">
+<div>
+<h2 class="text-3xl font-bold tracking-tight">Bundle Preview</h2>
+</div>
+<div class="rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 bg-white dark:bg-zinc-900 shadow-sm overflow-hidden">
+<div class="p-4 sm:p-6">
+<div class="flex flex-col-reverse sm:flex-row items-start justify-between gap-6">
+<div class="flex flex-col gap-1.5">
+<p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Bundle</p>
+<p class="text-xl font-bold">Summer Essentials Kit</p>
+<p class="text-sm text-zinc-500 dark:text-zinc-400">A curated collection for your summer adventures.</p>
+</div>
+<div class="w-full sm:w-48 h-32 bg-center bg-no-repeat bg-cover rounded-lg flex-shrink-0" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA_U-9vwZCjq_HjARKvfgBdEo-mc20jndEayz2Bz0cztJU3iC8sRJqnHKQ72Qfm49riTXZeLGUw83EpklsSLCDNzbh4Hk3oHu6Cy_FGD7JSyXLv9HnHrcViQaaLXYrpyOMFSLuFHBsrmSwpMmc0n_hCR2D3xwo6S4oG9nl48XQ8tsdkY_gOXLeX2jVspAUbI_yFRxX7FSQpVjc2YDe67EMhbcDj_5C08YL85RKJWq56DWdJGLTrciPYXzvG-n1hKD5qRibtsjauDnQ");'></div>
+</div>
+</div>
+<div class="border-t border-zinc-200/50 dark:border-zinc-800/50 px-4 sm:px-6 py-4">
+<h3 class="text-lg font-bold mb-4">Items in this bundle</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-4">
+<div class="h-14 w-14 flex-shrink-0 rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBfGSY_LoKcoC-qe_ti3vIl5JrWZth7C5R1ConLU9ZBh2t4bpJGqu3hFYGns3ayDE0Bw4UWmqRycidhj12FZpe6fSKC7HuX-ZLnf-GhP57437bEft8gJDAxyuBE8arITJv-csFGNdlN7pXYxQe2k98Kl7kouig6M8W6ANWYArofw5Z09pb-JapZnnW9K3LeEO6dOFeW9UdF8UZmaAhYvOFnDFkUM1qiLukQB8H4rGKWaoS8tAstYsCvwIxVokz0Jzx3IBwRD2Sj3aI");'></div>
+<div class="flex-grow">
+<p class="font-medium">Sunscreen SPF 50</p>
+<p class="text-sm text-zinc-500 dark:text-zinc-400">1 item</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="h-14 w-14 flex-shrink-0 rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDBOFLhMG9QfnXXG11wEUlldcFyEbhLVbMyEUUtuxhUOkajiRW0-DCplZKAeWeU_kCnalUr_u5OZD8DhWuLNXzFP2KI5-gVNEL9nPy-NPCqmSSAr4mjFBsK-yyD1qkKHTxhLJDwdTTm9FmDeMIvRnTKlTVOK_kPLhFA54dGtQenoK4RMFsqY9EejFEhgiVoTYotywm-jwFU5y2gi_srfMhxxpruHzC8FlRFtOsHQgASiHA6pb8v462t_7SH_pJi4jdHwXUe8k5Sa-E");'></div>
+<div class="flex-grow">
+<p class="font-medium">Beach Towel</p>
+<p class="text-sm text-zinc-500 dark:text-zinc-400">1 item</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="h-14 w-14 flex-shrink-0 rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_6RZ8orwdYHXHjegI-fQmuZyChCFQGL0ShbDGgj9jrswaybaOoZ13LvVdph0OYYZbOkJ4KLYWljbExUKyGkbfcwz7rxE3KJfISmEi0-I5bvQ7KmOVIwWsxSVKHLSgdGICKyBAyXWtytfGGwxHKvnFmKRlzRohvIJIi96YyKe8MUoxpwnxZyPuX5nhLEVG11O5IRubMAa7wR8KE-UHdMFIdWbDb1G4IXvqIaqIEKF64s00EC5QGv6HhyUkCexPzdzWl0hTmyNaSDQ");'></div>
+<div class="flex-grow">
+<p class="font-medium">Sunglasses</p>
+<p class="text-sm text-zinc-500 dark:text-zinc-400">1 item</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="h-14 w-14 flex-shrink-0 rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuADS1naUI-0R_pvSrxmiC_jqE9iubSsSNqplRz0DFeJMYmOPcBrzbvyf7dAaHn7CDbp9Vxt0kKnT-SP0b3Q6wM7AG_6Pe041DC0a7BTFinnVDarlokmnbbyMQBA0zTrmWOdkdFbq3ffGFa5FlYnygxVlqn1uVaYqEwKBaFbu8Lgncdn5DwcefVmEOjCebBUN9yVIAU6pyM95JKKbSUjQM_ytuUvq03zARKVRzfh8Jn0IjAt8nbDReQQM0SSiBVi_BQkgVCVYPe42p8");'></div>
+<div class="flex-grow">
+<p class="font-medium">Water Bottle</p>
+<p class="text-sm text-zinc-500 dark:text-zinc-400">1 item</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-zinc-200/50 dark:border-zinc-800/50 px-4 sm:px-6 py-4">
+<h3 class="text-lg font-bold mb-4">Price</h3>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm">
+<p class="text-zinc-600 dark:text-zinc-400">Bundle Price</p>
+<p class="font-medium text-zinc-900 dark:text-zinc-200">$49.99</p>
+</div>
+<div class="flex justify-between items-center text-sm">
+<p class="text-zinc-600 dark:text-zinc-400">Original Price</p>
+<p class="font-medium text-zinc-900 dark:text-zinc-200 line-through">$65.00</p>
+</div>
+<div class="flex justify-between items-center text-sm font-bold">
+<p class="text-primary">Your Savings</p>
+<p class="text-primary">$15.01</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-3 pt-4">
+<button class="flex w-full items-center justify-center rounded-lg h-12 px-5 bg-primary text-zinc-900 text-base font-bold transition-transform hover:scale-105 active:scale-100">
+<span>Add to Store</span>
+</button>
+<button class="flex w-full items-center justify-center rounded-lg h-12 px-5 bg-primary/20 dark:bg-primary/30 text-zinc-900 dark:text-white text-base font-bold transition-colors hover:bg-primary/30 dark:hover:bg-primary/40">
+<span>Push to Cart</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

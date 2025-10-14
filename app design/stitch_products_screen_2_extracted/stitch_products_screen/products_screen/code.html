@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bundle Builder</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#38e07b",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#122017",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-black dark:text-white">
+<div class="flex flex-col min-h-screen">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-primary/20 px-6 sm:px-10 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark">
+                        widgets
+                    </span>
+</div>
+<h1 class="text-xl font-bold">Bundle Builder</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center h-10 w-10 rounded-full bg-background-light dark:bg-background-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-black dark:text-white">
+                        help
+                    </span>
+</button>
+<div class="w-10 h-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALkGhA9iYaQ7QfPhFXJda2pCVOh79kIuK-bVbCqWRG56veuOmw9MggTszMc_anIHbZsUCAcDy7OzBM-Grol-LDlgnZL1FvQ9FNjfIuiGPsfVeXM8gLE2RMTGpu5JAlSbl2ImJBZb5y4BZyloOEtrbrTxV80Q9kDNvWCKJtBSYWDEyayidiIsZK-n14X-VkvoZVx4B3tbVZNDcvBJ-CQA1biL97QdnY2_Xf3jn3VL2i_yZpGByZRPWUQJZcNk60Jqs9-vM7iLu_xLA");'></div>
+</div>
+</header>
+<main class="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-screen-xl mx-auto">
+<h2 class="text-3xl font-bold mb-6">Add products to bundle</h2>
+<div class="mb-8">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-black/50 dark:text-white/50">
+                            search
+                        </span>
+<input class="w-full h-12 pl-12 pr-4 rounded-lg bg-white/50 dark:bg-black/20 border border-primary/20 focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow" placeholder="Search products by name or SKU" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+<div class="group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 bg-white/50 dark:bg-black/20">
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+<button class="bg-primary text-background-dark font-bold py-2 px-4 rounded-lg">Add to Bundle</button>
+</div>
+<div class="aspect-w-1 aspect-h-1 w-full overflow-hidden">
+<img alt="Cozy Knit Sweater" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgvNE3T-gY4dcwYWaHB0TXcEJT0JmFaN3JJGaHIbPAJE5XgK9HEJv1SOH7HM0RyHThW1YfX209r7IwPgZqbZaMqf7m7BgAn76rvaRLuGINAvvD_gxZG2ScyXnkiI2DMY598VxF8iDEQ4-6IfJ8wTPVaHn84exdAzI7smAhC4UTqa7nd3ORv2qsX9d1ruJcl7mM-Rv20sdGnbAl-9cNPGqVP8AgsO8u5KISjEKHIoTvJHo9ArmpvGibTF8DIga3KcCqAYNK1cx-8p4"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold truncate">Cozy Knit Sweater</h3>
+<p class="text-sm text-black/60 dark:text-white/60">10 in stock</p>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 bg-white/50 dark:bg-black/20">
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+<button class="bg-primary text-background-dark font-bold py-2 px-4 rounded-lg">Add to Bundle</button>
+</div>
+<div class="aspect-w-1 aspect-h-1 w-full overflow-hidden">
+<img alt="Classic Cotton Tee" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpwyTq7e9wnsu4TSVpTqVe6132FVa9bOEd50hq7fe6WhBWuc8fUOebk8p9w5lgJgskE6ycjci0fR3OVh-fcKMBj6TRUdnXkaLUECj6SQycMKm7QzPspwLnARZ-VVob6FOtlNZ1npTAbU8pRAvBZ3htfdv4R2TEfkfeBljM293eWyuGD2KSamkyP3hdPI2x-UlpdxU9xWOREGaDVwStRu-FR5xBHgI-fb84oSNoam3BDof3-cqOkHN37AcxKkBtKHf0v-EHhTuBvGQ"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold truncate">Classic Cotton Tee</h3>
+<p class="text-sm text-black/60 dark:text-white/60">25 in stock</p>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 bg-white/50 dark:bg-black/20">
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+<button class="bg-primary text-background-dark font-bold py-2 px-4 rounded-lg">Add to Bundle</button>
+</div>
+<div class="aspect-w-1 aspect-h-1 w-full overflow-hidden">
+<img alt="Relaxed Fit Jeans" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuLpcRS_NaHCrrr9BPIs--zmNmrVEOZxHXB-6nOK7_9tnrv3CCxkeQYr8_ReKR6y3DsMq_WHji2I5CE0dGfq9Ugc6AixEjS40S10QUqsqAMK-h2rvf8pYWx8MpsatbGIZVBYBOokXpwFCaZ6nM6k2JG4ZveGOVE8CLJoGV94La9-j39tjjFlVhDq53mPKOPo1tHP1DuFnIcX8kHX5HiiEbnH_7hKF8B33UbBfZW1bXslRdsDu0XRu-aY7RmLGxfqd7CBSnAO4yQI0"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold truncate">Relaxed Fit Jeans</h3>
+<p class="text-sm text-black/60 dark:text-white/60">5 in stock</p>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 bg-white/50 dark:bg-black/20">
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+<button class="bg-primary text-background-dark font-bold py-2 px-4 rounded-lg">Add to Bundle</button>
+</div>
+<div class="aspect-w-1 aspect-h-1 w-full overflow-hidden">
+<img alt="Sporty Running Shoes" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7xD4EROqQEc1TK7J3jhfVIzubQhBw00n6SddmQ8FTzNEtFeaHF6TH1lbC3z5ziD0yrYHrUkassnKMstfr1bHZk6nfIv08XhekGLQxtxfpncJ8ccGdURgIm8p48BuKUuDbgVUpHLbRpKIrsBD5pCdxwWJms8H3lXYCe7bXu6c93KX3Kvckl5UrmRmmIIjI69-wLB7Wjxp4A0lAM6NSlSzcGHDDdSncdR_zixAmzx9yE-_oX5ntYqTtOnlJzMSIa7PS15W2J2t_uzg"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold truncate">Sporty Running Shoes</h3>
+<p class="text-sm text-black/60 dark:text-white/60">15 in stock</p>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 bg-white/50 dark:bg-black/20">
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+<button class="bg-primary text-background-dark font-bold py-2 px-4 rounded-lg">Add to Bundle</button>
+</div>
+<div class="aspect-w-1 aspect-h-1 w-full overflow-hidden">
+<img alt="Elegant Silk Scarf" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY9gKSrBdi0aOqc_ltn0MGzcjvNfmaIfgB6T7aQdFYlJrSblzmDW-T6H27qLUf6OWOC8Fv7p8Tf78Oh2jkGmtM1-nP9hZnIjErtguad9KMdB-1XWF2DDYqB98ihs_yHJanTo81DQfezdvaT4aHbY198ekOesjReZ6-uMSdHGM37OiYCBZEHAaMg-Z6L2tHdR_mv668CX0iOQ6aIo1PUylGctEpaeK86HVevNHLSXUTez4SCaEPiDb2uhhPZgCna4qLvTOO1scNGzk"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold truncate">Elegant Silk Scarf</h3>
+<p class="text-sm text-black/60 dark:text-white/60">8 in stock</p>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 bg-white/50 dark:bg-black/20">
+<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+<button class="bg-primary text-background-dark font-bold py-2 px-4 rounded-lg">Add to Bundle</button>
+</div>
+<div class="aspect-w-1 aspect-h-1 w-full overflow-hidden">
+<img alt="Casual Canvas Backpack" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMtYeRTSwOChnUrCkA2aoUJ_8XPqwRbqRTkJhXcel5pz0j_-PIKWA2E1wrFK5L8MrkdMf4Qejk1qD_Y6ZLA__MlLHLGa2IXqnLqdZWKGMy4g8KoUPKdIbJHFBCXgVCmsdURy3rhTe76ULNffTmlHp-zxB6Czqc9EXd4mEGd_vb75OT53QMosrAeL3g5otezFpaBSU7kAztm7RGRNyRb0_B0LNr_6K5iXCfhbGVcS8fpNteDQ7LTbjmAeAFXumnCHgD6wjcDEtnhdE"/>
+</div>
+<div class="p-4">
+<h3 class="font-bold truncate">Casual Canvas Backpack</h3>
+<p class="text-sm text-black/60 dark:text-white/60">12 in stock</p>
+</div>
+</div>
+</div>
+<nav aria-label="Pagination" class="flex items-center justify-center gap-2 mt-12">
+<a class="flex items-center justify-center h-10 w-10 rounded-full hover:bg-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined">chevron_left</span>
+</a>
+<a class="flex items-center justify-center h-10 w-10 rounded-full bg-primary text-background-dark font-bold" href="#">1</a>
+<a class="flex items-center justify-center h-10 w-10 rounded-full hover:bg-primary/20 transition-colors" href="#">2</a>
+<a class="flex items-center justify-center h-10 w-10 rounded-full hover:bg-primary/20 transition-colors" href="#">3</a>
+<span class="flex items-center justify-center h-10 w-10">...</span>
+<a class="flex items-center justify-center h-10 w-10 rounded-full hover:bg-primary/20 transition-colors" href="#">10</a>
+<a class="flex items-center justify-center h-10 w-10 rounded-full hover:bg-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined">chevron_right</span>
+</a>
+</nav>
+</div>
+</main>
+</div>
+
+</body></html>

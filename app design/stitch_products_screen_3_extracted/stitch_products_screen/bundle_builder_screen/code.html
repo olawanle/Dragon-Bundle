@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Bundle</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#38e07b",
+            "background-light": "#f6f8f7",
+            "background-dark": "#122017",
+          },
+          fontFamily: {
+            "display": ["Manrope"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .form-select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2338e07b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.5rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      padding-right: 2.5rem;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-black dark:text-white">
+<div class="flex flex-col min-h-screen">
+<header class="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 border-b border-black/10 dark:border-white/10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_6_319)"><path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path></g><defs><clipPath id="clip0_6_319"><rect fill="white" height="48" width="48"></rect></clipPath></defs></svg>
+</div>
+<h1 class="text-xl font-bold">Bundler</h1>
+</div>
+<button class="flex items-center justify-center w-10 h-10 rounded-full bg-background-light dark:bg-background-dark hover:bg-primary/20 dark:hover:bg-primary/30">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<main class="flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="space-y-6">
+<h2 class="text-3xl font-bold tracking-tight">Create a bundle</h2>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium mb-1" for="bundle-title">Bundle title</label>
+<input class="w-full h-12 px-4 rounded-lg bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 focus:ring-primary focus:border-primary" id="bundle-title" placeholder="e.g. Summer Essentials" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1" for="bundle-description">Bundle description</label>
+<textarea class="w-full p-4 rounded-lg bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 focus:ring-primary focus:border-primary" id="bundle-description" placeholder="Describe your bundle" rows="4"></textarea>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-2">Cover image</h3>
+<div class="aspect-[3/2] w-full rounded-xl bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBERo2Eh7nXhlEbR8AIHSt1jrgMpm78mHPlLTFgiuMDV-AdTKMLvPsRRVViHPP3G0HchCrbPO3hAUkWEAr0-NC1kRF-oE1KyUX0N6pPvvqEZsQWWhET-lgxEo-LV_mEZU4lcrMEo5ZPkMQ0GygJAVeHvdlNvpGF4As-0TDoK_f7P_IVC8Xmz5QGDlx3k5kPl3USI6FT7qCtUbMkDltSY4WxElBnHZ0msYDfccGmBXYZU-S0NJv_TRnhzUb8_mUtLHz13mT6HL3_r78');"></div>
+<div class="flex gap-2 mt-2">
+<button class="flex-1 h-10 px-4 rounded-lg bg-primary/20 dark:bg-primary/30 text-sm font-bold text-black dark:text-white hover:bg-primary/30 dark:hover:bg-primary/40">
+                Choose from device
+              </button>
+<button class="flex-1 h-10 px-4 rounded-lg bg-primary/20 dark:bg-primary/30 text-sm font-bold text-black dark:text-white hover:bg-primary/30 dark:hover:bg-primary/40">
+                Auto-select image
+              </button>
+</div>
+</div>
+<div class="space-y-4">
+<h3 class="text-lg font-semibold">Discount</h3>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium mb-1" for="discount-type">Type</label>
+<select class="form-select appearance-none w-full h-12 px-4 rounded-lg bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 focus:ring-primary focus:border-primary" id="discount-type">
+<option>Percentage</option>
+<option>Fixed amount</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1" for="discount-amount">Amount</label>
+<input class="w-full h-12 px-4 rounded-lg bg-white/10 dark:bg-black/20 border border-black/10 dark:border-white/10 focus:ring-primary focus:border-primary" id="discount-amount" placeholder="e.g. 10" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex justify-between items-baseline">
+<h3 class="text-lg font-semibold">Products (2-6)</h3>
+<button class="text-sm font-bold text-primary hover:underline">Add Products</button>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-4 p-2 rounded-lg hover:bg-primary/10 dark:hover:bg-primary/20">
+<div class="w-14 h-14 rounded-lg bg-cover bg-center flex-shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDeHNKh05NKoNi36b_UgPycFkwihEemIgntUPJ3XxHxXG44bh4Rx9HGp2H4X0As7T9NrT1gVGN0jlD-s1Od5ssj9eUH66hOrDYnS-mjJGLepMq0Px9ftwxcODLtyUd-kU5YSuei2Vy0i9J2B3jtJtxYlTmmeB6xkwG-V6zw6dtynyMR37GDUgMKG1Ruu_rDrk09Ms47d_xGFh5gRIiWbouz-KUEruppUW3923cJW0h_-avXz5Cw7uh619OoWLfCPW-UzGRyEgpXZAY');"></div>
+<div class="flex-grow">
+<p class="font-medium">Product 1</p>
+<p class="text-sm text-black/60 dark:text-white/60">SKU: SS-TS-M</p>
+</div>
+<p class="font-semibold">$25.00</p>
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-black/60 dark:text-white/60 hover:bg-red-500/20 hover:text-red-500">
+<span class="material-symbols-outlined text-xl">remove_circle_outline</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-2 rounded-lg hover:bg-primary/10 dark:hover:bg-primary/20">
+<div class="w-14 h-14 rounded-lg bg-cover bg-center flex-shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAwvORoDvMqCKxPuyMKBsDWTCo9aCqPyTzzuKxuQ5iIwHoBBSkCT46pQ5QItQp-I4UI5g61Pkrrll0g5tki0HXLPzsZ-DkFRNN4S3FTAxAUANAceHjHg16_S1g0GBoLsLILc7jnHYNwJty7v9nv70wZvNOxfiHdrfX6suyWZL2qfRQtK2ezXE8iWWkIqxJNzulvzAHCAqnb5J2A6SsT70Q2ezH58_ZKRrKwfhWdpV2D1LyIK1vHa7TZVcu1v8Cw4gNb-42efaKx9fs');"></div>
+<div class="flex-grow">
+<p class="font-medium">Product 2</p>
+<p class="text-sm text-black/60 dark:text-white/60">SKU: SS-SH-L</p>
+</div>
+<p class="font-semibold">$45.00</p>
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-black/60 dark:text-white/60 hover:bg-red-500/20 hover:text-red-500">
+<span class="material-symbols-outlined text-xl">remove_circle_outline</span>
+</button>
+</div>
+<div class="flex items-center justify-center h-14 border-2 border-dashed border-black/20 dark:border-white/20 rounded-lg text-black/60 dark:text-white/60">
+<p>Add up to 4 more products</p>
+</div>
+</div>
+<div class="pt-6 border-t border-black/10 dark:border-white/10 space-y-4">
+<div class="flex justify-between items-center text-lg">
+<span class="font-medium">Subtotal</span>
+<span>$70.00</span>
+</div>
+<div class="flex justify-between items-center text-lg">
+<span class="font-medium">Discount (10%)</span>
+<span class="text-red-500">-$7.00</span>
+</div>
+<div class="flex justify-between items-center text-2xl font-bold">
+<span>Bundle Total</span>
+<span>$63.00</span>
+</div>
+</div>
+<button class="w-full h-14 px-5 rounded-xl bg-primary text-black font-bold text-lg hover:opacity-90">
+            Create bundle
+          </button>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

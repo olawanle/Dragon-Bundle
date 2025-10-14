@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<title>BundleUp - Choose Your Plan</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope:wght@400;500;700;800" onload="this.rel='stylesheet'" rel="preload"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#38e07b",
+            "background-light": "#f6f8f7",
+            "background-dark": "#122017",
+          },
+          fontFamily: {
+            "display": ["Manrope"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#122017] dark:text-background-light">
+<div class="flex flex-col min-h-screen">
+<header class="border-b border-primary/20 dark:border-primary/30">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">layers</span>
+</div>
+<h1 class="text-xl font-bold">BundleUp</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[#122017] dark:text-background-light">help</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBqdsiBTCOYGMvAWHqlzkaSTTFlQLmmidypEIA7rNz2Kuwh-XdvBtZP15BFbSYYDm2bRbydmK7z2ySk9YvWOTu0Fb7UjPnggBrD9Szb2OqJMCUoK2ZXzHmzH6xeP3AqNzz8GXOkjNCjfl8PTD2byNLjwtfldA9t-pUUd0i2bgTeipuqHzBGYcveqPk3vC2LYJ-VcvIiml66kJ1D93H7RyuNayH5MtLI_cZvMl-C1wuoVeX032vCr13F_Tcdgg0L4o6XfFPoBNyiGyU");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">Choose your plan</h2>
+<p class="mt-4 text-lg text-[#122017]/70 dark:text-background-light/70">Cancel anytime. No hidden fees.</p>
+</div>
+<div class="mt-12 grid gap-8 lg:grid-cols-3 lg:gap-6">
+<div class="flex flex-col p-6 bg-background-light dark:bg-[#122017]/50 rounded-xl border border-primary/20 dark:border-primary/40">
+<div class="flex-grow">
+<h3 class="text-2xl font-bold">Free</h3>
+<div class="mt-4 flex items-baseline gap-x-2">
+<span class="text-5xl font-extrabold tracking-tight">$0</span>
+<span class="text-lg font-semibold text-[#122017]/70 dark:text-background-light/70">/month</span>
+</div>
+<ul class="mt-6 space-y-4">
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Up to 3 bundles</span>
+</li>
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Basic analytics</span>
+</li>
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Community support</span>
+</li>
+</ul>
+</div>
+<button class="mt-8 w-full bg-primary/20 hover:bg-primary/30 text-primary font-bold py-3 px-4 rounded-lg transition-colors">
+              Select Plan
+            </button>
+</div>
+<div class="relative flex flex-col p-6 bg-background-light dark:bg-[#122017]/50 rounded-xl border-2 border-primary">
+<div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+<span class="inline-flex items-center px-4 py-1 rounded-full text-sm font-semibold tracking-wide bg-primary text-white">Most Popular</span>
+</div>
+<div class="flex-grow">
+<h3 class="text-2xl font-bold">Silver</h3>
+<div class="mt-4 flex items-baseline gap-x-2">
+<span class="text-5xl font-extrabold tracking-tight">$10</span>
+<span class="text-lg font-semibold text-[#122017]/70 dark:text-background-light/70">/month</span>
+</div>
+<ul class="mt-6 space-y-4">
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Unlimited bundles</span>
+</li>
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Advanced analytics</span>
+</li>
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Priority support</span>
+</li>
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Custom branding</span>
+</li>
+</ul>
+</div>
+<button class="mt-8 w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+              Select Plan
+            </button>
+</div>
+<div class="flex flex-col p-6 bg-background-light dark:bg-[#122017]/50 rounded-xl border border-primary/20 dark:border-primary/40">
+<div class="flex-grow">
+<h3 class="text-2xl font-bold">Gold</h3>
+<div class="mt-4 flex items-baseline gap-x-2">
+<span class="text-5xl font-extrabold tracking-tight">$19</span>
+<span class="text-lg font-semibold text-[#122017]/70 dark:text-background-light/70">/month</span>
+</div>
+<ul class="mt-6 space-y-4">
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Unlimited bundles</span>
+</li>
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Advanced analytics</span>
+</li>
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Priority support</span>
+</li>
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Custom branding</span>
+</li>
+<li class="flex items-start gap-x-3">
+<span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+<span>Dedicated account manager</span>
+</li>
+</ul>
+</div>
+<button class="mt-8 w-full bg-primary/20 hover:bg-primary/30 text-primary font-bold py-3 px-4 rounded-lg transition-colors">
+              Select Plan
+            </button>
+</div>
+</div>
+</div>
+</main>
+<footer class="text-center py-6 text-sm text-[#122017]/60 dark:text-background-light/60 border-t border-primary/20 dark:border-primary/30">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<p>© 2024 BundleUp. All Rights Reserved.</p>
+</div>
+</footer>
+</div>
+
+</body></html>

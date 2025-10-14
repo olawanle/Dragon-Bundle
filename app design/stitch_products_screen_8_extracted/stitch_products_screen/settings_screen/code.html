@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BundleUp - Settings</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#38e07b",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#122017",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="flex flex-col min-h-screen">
+<header class="bg-background-light dark:bg-background-dark sticky top-0 z-10 border-b border-slate-200 dark:border-slate-800">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-4">
+<div class="bg-primary p-2 rounded-lg">
+<svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h1 class="text-xl font-bold text-slate-900 dark:text-white">BundleUp</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-400">
+                                settings
+                            </span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA8DOpxfn50-ajNzs3yRbgMNv3Bvi_1mOnMTnQ4fle2kiO2ylb-55lZUtQ1au5GZ1GkuwIpS7IEhk0pkKrpFIzXnlY5GHrsLst7NEO5p6LWkXkifeiCBgqxdtod8kv8NX_tNSsfgRyxEi9ZnoBwOvLSljw1HXMUKzrHHke609KGMkRBMngGYX-KmtI1_TkBurlOQ0IPTGw1x3Ml-dD6aX9n_d9q8l0TryZQ8XKbBMBachF6VP2Li20FeCeLrezPhdMl9bdSQiXNA0A");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-3xl mx-auto">
+<h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-8">Settings</h2>
+<div class="space-y-12">
+<div>
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Account</h3>
+<div class="bg-white dark:bg-background-dark/50 rounded-xl shadow-sm">
+<a class="flex items-center p-4 gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-xl transition-colors duration-200" href="#">
+<div class="bg-primary/20 text-primary p-3 rounded-lg">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-800 dark:text-slate-200">Manage Account</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">View and edit your personal details.</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500">chevron_right</span>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">App Preferences</h3>
+<div class="bg-white dark:bg-background-dark/50 rounded-xl shadow-sm">
+<a class="flex items-center p-4 gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-t-xl transition-colors duration-200" href="#">
+<div class="bg-primary/20 text-primary p-3 rounded-lg">
+<span class="material-symbols-outlined">tune</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-800 dark:text-slate-200">Preferences</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Customize your app experience.</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500">chevron_right</span>
+</a>
+<hr class="border-slate-200 dark:border-slate-800"/>
+<a class="flex items-center p-4 gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-b-xl transition-colors duration-200" href="#">
+<div class="bg-primary/20 text-primary p-3 rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-800 dark:text-slate-200">Notifications</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Choose what updates you receive.</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500">chevron_right</span>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Help &amp; Support</h3>
+<div class="bg-white dark:bg-background-dark/50 rounded-xl shadow-sm">
+<a class="flex items-center p-4 gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-t-xl transition-colors duration-200" href="#">
+<div class="bg-primary/20 text-primary p-3 rounded-lg">
+<span class="material-symbols-outlined">help_center</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-800 dark:text-slate-200">Help Center</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Find answers and tutorials.</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500">chevron_right</span>
+</a>
+<hr class="border-slate-200 dark:border-slate-800"/>
+<a class="flex items-center p-4 gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-b-xl transition-colors duration-200" href="#">
+<div class="bg-primary/20 text-primary p-3 rounded-lg">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div class="flex-1">
+<p class="font-medium text-slate-800 dark:text-slate-200">Contact Support</p>
+<p class="text-sm text-slate-500 dark:text-slate-400">Get in touch with our team.</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+<div class="mt-12 text-center">
+<button class="bg-red-500/10 text-red-500 dark:bg-red-500/20 dark:text-red-400 font-bold py-3 px-6 rounded-lg hover:bg-red-500/20 dark:hover:bg-red-500/30 transition-colors duration-200">
+                        Log Out
+                    </button>
+</div>
+</div>
+</main>
+<footer class="bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm text-slate-500 dark:text-slate-400">
+<p>© 2024 BundleUp. All rights reserved.</p>
+</div>
+</footer>
+</div>
+
+
+</body></html>

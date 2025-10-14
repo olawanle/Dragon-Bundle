@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Bundle - API Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f6f8f7;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #38e07b, #2bc46a);
+            color: white;
+            border-radius: 12px;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .button {
+            background: #38e07b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #2bc46a;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .product-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .bundle-form {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐉 Dragon Bundle</h1>
+        <p>API Testing Interface</p>
+    </div>
+
+    <div class="section">
+        <h2>🔧 API Status</h2>
+        <button class="button" onclick="checkHealth()">Check Health</button>
+        <div id="health-status"></div>
+    </div>
+
+    <div class="section">
+        <h2>🏪 Shop Installation</h2>
+        <div class="form-group">
+            <label for="shop-domain">Shop Domain:</label>
+            <input type="text" id="shop-domain" placeholder="your-shop" value="test-shop">
+        </div>
+        <button class="button" onclick="installApp()">Install App</button>
+        <div id="install-status"></div>
+    </div>
+
+    <div class="section">
+        <h2>📦 Products</h2>
+        <button class="button" onclick="loadProducts()">Load Products</button>
+        <button class="button" onclick="searchProducts()">Search Products</button>
+        <div class="form-group">
+            <label for="search-query">Search Query:</label>
+            <input type="text" id="search-query" placeholder="Enter search term" value="jeans">
+        </div>
+        <div id="products-container"></div>
+    </div>
+
+    <div class="section">
+        <h2>🎁 Bundle Builder</h2>
+        <div class="bundle-form">
+            <div class="form-group">
+                <label for="bundle-title">Bundle Title:</label>
+                <input type="text" id="bundle-title" placeholder="Enter bundle name" value="Test Bundle">
+            </div>
+            <div class="form-group">
+                <label for="bundle-description">Description:</label>
+                <textarea id="bundle-description" placeholder="Enter bundle description">A great test bundle</textarea>
+            </div>
+            <div class="form-group">
+                <label for="discount-type">Discount Type:</label>
+                <select id="discount-type">
+                    <option value="percentage">Percentage</option>
+                    <option value="fixed">Fixed Amount</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="discount-value">Discount Value:</label>
+                <input type="number" id="discount-value" placeholder="10" value="10">
+            </div>
+        </div>
+        <button class="button" onclick="createBundle()">Create Bundle</button>
+        <div id="bundle-status"></div>
+    </div>
+
+    <div class="section">
+        <h2>🛒 Checkout</h2>
+        <div class="form-group">
+            <label for="bundle-id">Bundle ID:</label>
+            <input type="number" id="bundle-id" placeholder="Enter bundle ID" value="1">
+        </div>
+        <button class="button" onclick="createCheckout()">Create Checkout</button>
+        <div id="checkout-status"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+
+        async function makeRequest(url, options = {}) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                const data = await response.json();
+                return { success: response.ok, data, status: response.status };
+            } catch (error) {
+                return { success: false, error: error.message };
+            }
+        }
+
+        function showStatus(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+
+        async function checkHealth() {
+            const result = await makeRequest('http://localhost:3000/health');
+            if (result.success) {
+                showStatus('health-status', `✅ Server is running! Status: ${result.data.status}`, 'success');
+            } else {
+                showStatus('health-status', `❌ Server error: ${result.error}`, 'error');
+            }
+        }
+
+        async function installApp() {
+            const shopDomain = document.getElementById('shop-domain').value;
+            const result = await makeRequest(`${API_BASE}/shop/install?shop=${shopDomain}.myshopify.com`);
+            if (result.success) {
+                showStatus('install-status', `✅ App installed successfully! Token: ${result.data.token}`, 'success');
+            } else {
+                showStatus('install-status', `❌ Installation failed: ${result.error}`, 'error');
+            }
+        }
+
+        async function loadProducts() {
+            const result = await makeRequest(`${API_BASE}/products`);
+            if (result.success) {
+                displayProducts(result.data.products);
+                showStatus('products-container', `✅ Loaded ${result.data.products.length} products`, 'success');
+            } else {
+                showStatus('products-container', `❌ Failed to load products: ${result.error}`, 'error');
+            }
+        }
+
+        async function searchProducts() {
+            const query = document.getElementById('search-query').value;
+            const result = await makeRequest(`${API_BASE}/products/search?q=${encodeURIComponent(query)}`);
+            if (result.success) {
+                displayProducts(result.data.products);
+                showStatus('products-container', `✅ Found ${result.data.products.length} products for "${query}"`, 'success');
+            } else {
+                showStatus('products-container', `❌ Search failed: ${result.error}`, 'error');
+            }
+        }
+
+        function displayProducts(products) {
+            const container = document.getElementById('products-container');
+            if (products.length === 0) {
+                container.innerHTML = '<div class="status info">No products found</div>';
+                return;
+            }
+
+            const productsHtml = products.map(product => `
+                <div class="product-card">
+                    <img src="${product.images[0]?.url || 'https://via.placeholder.com/200'}" 
+                         alt="${product.images[0]?.altText || product.title}" 
+                         class="product-image">
+                    <h3>${product.title}</h3>
+                    <p>${product.description || 'No description'}</p>
+                    <p><strong>Price: $${product.variants[0]?.price || 'N/A'}</strong></p>
+                    <p>Stock: ${product.variants[0]?.inventoryQuantity || 'N/A'}</p>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="product-grid">
+                    ${productsHtml}
+                </div>
+            `;
+        }
+
+        async function createBundle() {
+            const bundleData = {
+                title: document.getElementById('bundle-title').value,
+                description: document.getElementById('bundle-description').value,
+                discount_type: document.getElementById('discount-type').value,
+                discount_value: parseFloat(document.getElementById('discount-value').value),
+                items: [
+                    {
+                        product_id: 'gid://shopify/Product/1',
+                        variant_id: 'gid://shopify/ProductVariant/1',
+                        quantity: 1,
+                        title: 'Sporty Running Shoes',
+                        price: '99.99'
+                    },
+                    {
+                        product_id: 'gid://shopify/Product/2',
+                        variant_id: 'gid://shopify/ProductVariant/2',
+                        quantity: 1,
+                        title: 'Classic Cotton Tee',
+                        price: '24.99'
+                    }
+                ]
+            };
+
+            const result = await makeRequest(`${API_BASE}/bundles`, {
+                method: 'POST',
+                body: JSON.stringify(bundleData)
+            });
+
+            if (result.success) {
+                showStatus('bundle-status', `✅ Bundle created successfully! ID: ${result.data.id}`, 'success');
+            } else {
+                showStatus('bundle-status', `❌ Bundle creation failed: ${result.error}`, 'error');
+            }
+        }
+
+        async function createCheckout() {
+            const bundleId = document.getElementById('bundle-id').value;
+            const result = await makeRequest(`${API_BASE}/checkout/create`, {
+                method: 'POST',
+                body: JSON.stringify({ bundle_id: parseInt(bundleId) })
+            });
+
+            if (result.success) {
+                showStatus('checkout-status', 
+                    `✅ Checkout created! <a href="${result.data.checkout_url}" target="_blank">Open Checkout</a>`, 
+                    'success');
+            } else {
+                showStatus('checkout-status', `❌ Checkout creation failed: ${result.error}`, 'error');
+            }
+        }
+
+        // Auto-check health on page load
+        window.onload = function() {
+            checkHealth();
+        };
+    </script>
+</body>
+</html>
