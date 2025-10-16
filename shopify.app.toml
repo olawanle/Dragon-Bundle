@@ -2,7 +2,7 @@
 
 client_id = "796344ed84595f62e30b50fa52b5df8c"
 name = "Dragon Bundle"
-application_url = "https://dragonbundle.onrender.com/"
+application_url = "https://dragonbundle.onrender.com"
 embedded = true
 
 [build]
