@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type {
   ActionFunctionArgs,
   HeadersFunction,
   LoaderFunctionArgs,
 } from "react-router";
-import { useFetcher } from "react-router";
+import { useFetcher, useNavigate } from "react-router";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
 import { boundary } from "@shopify/shopify-app-react-router/server";
+import { BundleService } from "~/services/bundleService";
+import type { Bundle } from "~/types/bundle";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
@@ -86,6 +88,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 export default function Index() {
   const fetcher = useFetcher<typeof action>();
+  const navigate = useNavigate();
+  const [bundles, setBundles] = useState<Bundle[]>([]);
+  const [isLoadingBundles, setIsLoadingBundles] = useState(true);
 
   const shopify = useAppBridge();
   const isLoading =
@@ -98,53 +103,119 @@ export default function Index() {
     }
   }, [fetcher.data?.product?.id, shopify]);
 
+  useEffect(() => {
+    loadBundles();
+  }, []);
+
+  const loadBundles = async () => {
+    try {
+      const fetchedBundles = await BundleService.getBundles();
+      setBundles(fetchedBundles);
+    } catch (error) {
+      console.error("Failed to load bundles:", error);
+    } finally {
+      setIsLoadingBundles(false);
+    }
+  };
+
   const generateProduct = () => fetcher.submit({}, { method: "POST" });
 
   return (
-    <s-page heading="Shopify app template">
-      <s-button slot="primary-action" onClick={generateProduct}>
-        Generate a product
+    <s-page heading="Dragon Bundle - Product Bundle Creator">
+      <s-button slot="primary-action" onClick={() => navigate("/app/bundle-builder")}>
+        Create New Bundle
       </s-button>
 
-      <s-section heading="Congrats on creating a new Shopify app 🎉">
+      <s-section heading="Welcome to Dragon Bundle 🐉">
         <s-paragraph>
-          This embedded app template uses{" "}
-          <s-link
-            href="https://shopify.dev/docs/apps/tools/app-bridge"
-            target="_blank"
-          >
-            App Bridge
-          </s-link>{" "}
-          interface examples like an{" "}
-          <s-link href="/app/additional">additional page in the app nav</s-link>
-          , as well as an{" "}
-          <s-link
-            href="https://shopify.dev/docs/api/admin-graphql"
-            target="_blank"
-          >
-            Admin GraphQL
-          </s-link>{" "}
-          mutation demo, to provide a starting point for app development.
+          Create amazing product bundles to increase your sales and customer satisfaction. 
+          Combine multiple products with attractive discounts to boost your revenue.
         </s-paragraph>
       </s-section>
-      <s-section heading="Get started with products">
+
+      <s-section heading="Quick Actions">
+        <s-stack direction="inline" gap="base">
+          <s-button onClick={() => navigate("/app/bundle-builder")}>
+            Create Bundle
+          </s-button>
+          <s-button onClick={() => navigate("/app/my-bundles")} variant="secondary">
+            View My Bundles
+          </s-button>
+          <s-button onClick={generateProduct} variant="tertiary">
+            Generate Test Product
+          </s-button>
+        </s-stack>
+      </s-section>
+      <s-section heading="Recent Bundles">
+        {isLoadingBundles ? (
+          <s-paragraph>Loading bundles...</s-paragraph>
+        ) : bundles.length === 0 ? (
+          <s-paragraph>
+            No bundles created yet. Create your first bundle to get started!
+          </s-paragraph>
+        ) : (
+          <s-stack direction="block" gap="base">
+            {bundles.slice(0, 3).map((bundle) => {
+              const pricing = BundleService.calculateBundlePricing(bundle);
+              return (
+                <s-box
+                  key={bundle.id}
+                  padding="base"
+                  borderWidth="base"
+                  borderRadius="base"
+                  background="subdued"
+                >
+                  <s-stack direction="inline" gap="base" align="space-between">
+                    <div>
+                      <s-heading level={3}>{bundle.title}</s-heading>
+                      <s-paragraph>
+                        {bundle.items.length} products • {bundle.discount_type === "percentage" ? `${bundle.discount_value}%` : `$${bundle.discount_value}`} discount
+                      </s-paragraph>
+                      <s-paragraph>
+                        <s-text variant="subdued">
+                          ${pricing.totalPrice.toFixed(2)} → ${pricing.finalPrice.toFixed(2)} (Save ${pricing.savings.toFixed(2)})
+                        </s-text>
+                      </s-paragraph>
+                    </div>
+                    <s-stack direction="inline" gap="tight">
+                      <s-button
+                        onClick={() => navigate(`/app/bundle-preview/${bundle.id}`)}
+                        variant="tertiary"
+                        size="slim"
+                      >
+                        Preview
+                      </s-button>
+                      <s-button
+                        onClick={() => navigate("/app/my-bundles")}
+                        variant="tertiary"
+                        size="slim"
+                      >
+                        Manage
+                      </s-button>
+                    </s-stack>
+                  </s-stack>
+                </s-box>
+              );
+            })}
+            {bundles.length > 3 && (
+              <s-button onClick={() => navigate("/app/my-bundles")} variant="tertiary">
+                View All Bundles ({bundles.length})
+              </s-button>
+            )}
+          </s-stack>
+        )}
+      </s-section>
+
+      <s-section heading="Test Product Generation">
         <s-paragraph>
-          Generate a product with GraphQL and get the JSON output for that
-          product. Learn more about the{" "}
-          <s-link
-            href="https://shopify.dev/docs/api/admin-graphql/latest/mutations/productCreate"
-            target="_blank"
-          >
-            productCreate
-          </s-link>{" "}
-          mutation in our API references.
+          Generate a test product to use in your bundles. This helps you test the bundle creation process.
         </s-paragraph>
         <s-stack direction="inline" gap="base">
           <s-button
             onClick={generateProduct}
             {...(isLoading ? { loading: true } : {})}
           >
-            Generate a product
+            Generate Test Product
           </s-button>
           {fetcher.data?.product && (
             <s-button
@@ -156,38 +227,10 @@ export default function Index() {
               target="_blank"
               variant="tertiary"
             >
-              Edit product
+              Edit Product
             </s-button>
           )}
         </s-stack>
-        {fetcher.data?.product && (
-          <s-section heading="productCreate mutation">
-            <s-stack direction="block" gap="base">
-              <s-box
-                padding="base"
-                borderWidth="base"
-                borderRadius="base"
-                background="subdued"
-              >
-                <pre style={{ margin: 0 }}>
-                  <code>{JSON.stringify(fetcher.data.product, null, 2)}</code>
-                </pre>
-              </s-box>
-
-              <s-heading>productVariantsBulkUpdate mutation</s-heading>
-              <s-box
-                padding="base"
-                borderWidth="base"
-                borderRadius="base"
-                background="subdued"
-              >
-                <pre style={{ margin: 0 }}>
-                  <code>{JSON.stringify(fetcher.data.variant, null, 2)}</code>
-                </pre>
-              </s-box>
-            </s-stack>
-          </s-section>
-        )}
       </s-section>
 
       <s-section slot="aside" heading="App template specs">

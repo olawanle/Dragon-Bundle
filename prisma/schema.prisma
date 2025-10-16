@@ -30,3 +30,21 @@ model Session {
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
 }
+
+model Bundle {
+  id               String   @id @default(cuid())
+  shop_domain      String
+  title            String
+  description      String?
+  cover_image_url  String?
+  discount_type    String   // 'percentage' or 'fixed'
+  discount_value   Float
+  items            String   // JSON string of bundle items
+  is_active        Boolean  @default(true)
+  stats            String?  // JSON string of stats
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  @@index([shop_domain])
+  @@index([is_active])
+}
