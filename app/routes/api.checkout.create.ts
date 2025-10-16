@@ -1,4 +1,4 @@
-import { json, type ActionFunctionArgs } from "react-router";
+import { type ActionFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
 import db from "../db.server";
 import { BundleService } from "../services/bundleService";
@@ -8,10 +8,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   
   if (request.method === "POST") {
     try {
-      const { bundle_id } = await request.json();
+      const { bundle_id } = await request.Response.json();
       
       if (!bundle_id) {
-        return json({ error: "Bundle ID is required" }, { status: 400 });
+        return Response.json({ error: "Bundle ID is required" }, { status: 400 });
       }
 
       // Get bundle from database
@@ -24,7 +24,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       });
 
       if (!bundle) {
-        return json({ error: "Bundle not found or inactive" }, { status: 404 });
+        return Response.json({ error: "Bundle not found or inactive" }, { status: 404 });
       }
 
       const bundleItems = JSON.parse(bundle.items);
@@ -88,10 +88,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         },
       });
 
-      const checkoutData = await checkout.json();
+      const checkoutData = await checkout.Response.json();
       
       if (checkoutData.data?.checkoutCreate?.checkoutUserErrors?.length > 0) {
-        return json({ 
+        return Response.json({ 
           error: checkoutData.data.checkoutCreate.checkoutUserErrors[0].message 
         }, { status: 400 });
       }
@@ -99,7 +99,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       const createdCheckout = checkoutData.data?.checkoutCreate?.checkout;
       
       if (!createdCheckout) {
-        return json({ error: "Failed to create checkout" }, { status: 500 });
+        return Response.json({ error: "Failed to create checkout" }, { status: 500 });
       }
 
       // Update bundle stats
@@ -114,16 +114,16 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         },
       });
 
-      return json({ 
+      return Response.json({ 
         checkout_url: createdCheckout.webUrl,
         checkout_id: createdCheckout.id,
         total_price: createdCheckout.totalPrice,
       });
     } catch (error) {
       console.error("Error creating checkout:", error);
-      return json({ error: "Failed to create checkout" }, { status: 500 });
+      return Response.json({ error: "Failed to create checkout" }, { status: 500 });
     }
   }
 
-  return json({ error: "Method not allowed" }, { status: 405 });
+  return Response.json({ error: "Method not allowed" }, { status: 405 });
 };

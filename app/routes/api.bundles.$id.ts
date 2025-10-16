@@ -1,4 +1,4 @@
-import { json, type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
+import { type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
 import db from "../db.server";
 import type { BundleFormData } from "../types/bundle";
@@ -15,13 +15,13 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     });
 
     if (!bundle) {
-      return json({ error: "Bundle not found" }, { status: 404 });
+      return Response.json({ error: "Bundle not found" }, { status: 404 });
     }
 
-    return json({ bundle });
+    return Response.json({ bundle });
   } catch (error) {
     console.error("Error fetching bundle:", error);
-    return json({ error: "Failed to fetch bundle" }, { status: 500 });
+    return Response.json({ error: "Failed to fetch bundle" }, { status: 500 });
   }
 };
 
@@ -30,7 +30,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   
   if (request.method === "PUT") {
     try {
-      const bundleData: Partial<BundleFormData> = await request.json();
+      const bundleData: Partial<BundleFormData> = await request.Response.json();
       
       const bundle = await db.bundle.update({
         where: {
@@ -47,10 +47,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       });
 
-      return json({ bundle });
+      return Response.json({ bundle });
     } catch (error) {
       console.error("Error updating bundle:", error);
-      return json({ error: "Failed to update bundle" }, { status: 500 });
+      return Response.json({ error: "Failed to update bundle" }, { status: 500 });
     }
   }
 
@@ -62,12 +62,12 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       });
 
-      return json({ success: true });
+      return Response.json({ success: true });
     } catch (error) {
       console.error("Error deleting bundle:", error);
-      return json({ error: "Failed to delete bundle" }, { status: 500 });
+      return Response.json({ error: "Failed to delete bundle" }, { status: 500 });
     }
   }
 
-  return json({ error: "Method not allowed" }, { status: 405 });
+  return Response.json({ error: "Method not allowed" }, { status: 405 });
 };

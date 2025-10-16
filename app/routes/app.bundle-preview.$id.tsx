@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import { json, type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
+import { type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
 import { BundleService } from "../services/bundleService";
 import type { Bundle } from "../types/bundle";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
-  return json({ bundleId: params.id });
+  return Response.json({ bundleId: params.id });
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -20,13 +20,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   if (action === "create_checkout") {
     try {
       const result = await BundleService.createCheckout(bundleId);
-      return json({ success: true, checkout_url: result.checkout_url });
+      return Response.json({ success: true, checkout_url: result.checkout_url });
     } catch (error) {
-      return json({ error: error instanceof Error ? error.message : "Failed to create checkout" }, { status: 400 });
+      return Response.json({ error: error instanceof Error ? error.message : "Failed to create checkout" }, { status: 400 });
     }
   }
 
-  return json({ error: "Invalid action" }, { status: 400 });
+  return Response.json({ error: "Invalid action" }, { status: 400 });
 };
 
 export default function BundlePreview() {
@@ -69,7 +69,7 @@ export default function BundlePreview() {
         body: formData,
       });
 
-      const result = await response.json();
+      const result = await response.Response.json();
 
       if (result.success) {
         window.open(result.checkout_url, '_blank');

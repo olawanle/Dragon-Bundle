@@ -1,4 +1,4 @@
-import { json, type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
+import { type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
 import db from "../db.server";
 import type { Bundle, BundleFormData } from "../types/bundle";
@@ -16,10 +16,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       },
     });
 
-    return json({ bundles });
+    return Response.json({ bundles });
   } catch (error) {
     console.error("Error fetching bundles:", error);
-    return json({ error: "Failed to fetch bundles" }, { status: 500 });
+    return Response.json({ error: "Failed to fetch bundles" }, { status: 500 });
   }
 };
 
@@ -28,11 +28,11 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   
   if (request.method === "POST") {
     try {
-      const bundleData: BundleFormData = await request.json();
+      const bundleData: BundleFormData = await request.Response.json();
       
       // Validate bundle data
       if (!bundleData.title || bundleData.items.length < 2) {
-        return json({ error: "Bundle must have a title and at least 2 items" }, { status: 400 });
+        return Response.json({ error: "Bundle must have a title and at least 2 items" }, { status: 400 });
       }
 
       // Create bundle
@@ -49,12 +49,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         },
       });
 
-      return json({ bundle });
+      return Response.json({ bundle });
     } catch (error) {
       console.error("Error creating bundle:", error);
-      return json({ error: "Failed to create bundle" }, { status: 500 });
+      return Response.json({ error: "Failed to create bundle" }, { status: 500 });
     }
   }
 
-  return json({ error: "Method not allowed" }, { status: 405 });
+  return Response.json({ error: "Method not allowed" }, { status: 405 });
 };

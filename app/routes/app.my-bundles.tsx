@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { json, type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
+import { type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
 import { BundleService } from "../services/bundleService";
 import type { Bundle } from "../types/bundle";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
-  return json({});
+  return Response.json({});
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -20,9 +20,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   if (action === "delete") {
     try {
       await BundleService.deleteBundle(bundleId);
-      return json({ success: true });
+      return Response.json({ success: true });
     } catch (error) {
-      return json({ error: error instanceof Error ? error.message : "Failed to delete bundle" }, { status: 400 });
+      return Response.json({ error: error instanceof Error ? error.message : "Failed to delete bundle" }, { status: 400 });
     }
   }
 
@@ -33,13 +33,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         ...bundle,
         is_active: !bundle.is_active
       });
-      return json({ success: true, bundle: updatedBundle });
+      return Response.json({ success: true, bundle: updatedBundle });
     } catch (error) {
-      return json({ error: error instanceof Error ? error.message : "Failed to update bundle" }, { status: 400 });
+      return Response.json({ error: error instanceof Error ? error.message : "Failed to update bundle" }, { status: 400 });
     }
   }
 
-  return json({ error: "Invalid action" }, { status: 400 });
+  return Response.json({ error: "Invalid action" }, { status: 400 });
 };
 
 export default function MyBundles() {
@@ -77,7 +77,7 @@ export default function MyBundles() {
         body: formData,
       });
 
-      const result = await response.json();
+      const result = await response.Response.json();
 
       if (result.success) {
         setBundles(bundles.filter(b => b.id !== bundleId));
@@ -100,7 +100,7 @@ export default function MyBundles() {
         body: formData,
       });
 
-      const result = await response.json();
+      const result = await response.Response.json();
 
       if (result.success) {
         setBundles(bundles.map(b => 

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { json, type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
+import { type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
 import { BundleService } from "../services/bundleService";
 import type { BundleFormData, Product, BundleItem } from "../types/bundle";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
-  return json({});
+  return Response.json({});
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -27,13 +27,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
     try {
       const bundle = await BundleService.createBundle(bundleData);
-      return json({ success: true, bundle });
+      return Response.json({ success: true, bundle });
     } catch (error) {
-      return json({ error: error instanceof Error ? error.message : "Failed to create bundle" }, { status: 400 });
+      return Response.json({ error: error instanceof Error ? error.message : "Failed to create bundle" }, { status: 400 });
     }
   }
 
-  return json({ error: "Invalid action" }, { status: 400 });
+  return Response.json({ error: "Invalid action" }, { status: 400 });
 };
 
 export default function BundleBuilder() {
@@ -157,7 +157,7 @@ export default function BundleBuilder() {
         body: formData,
       });
 
-      const result = await response.json();
+      const result = await response.Response.json();
 
       if (result.success) {
         navigate("/app/my-bundles");
