@@ -1,7 +1,7 @@
 import { json, type ActionFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
-import { db } from "../db.server";
-import { BundleService } from "~/services/bundleService";
+import db from "../db.server";
+import { BundleService } from "../services/bundleService";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const { session, admin } = await authenticate.admin(request);

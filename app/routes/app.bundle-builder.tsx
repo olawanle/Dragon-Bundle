@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { json, type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
-import { BundleService } from "~/services/bundleService";
-import type { BundleFormData, Product, BundleItem } from "~/types/bundle";
+import { BundleService } from "../services/bundleService";
+import type { BundleFormData, Product, BundleItem } from "../types/bundle";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);

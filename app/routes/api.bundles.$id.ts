@@ -1,7 +1,7 @@
 import { json, type ActionFunctionArgs, type LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
-import { db } from "../db.server";
-import type { BundleFormData } from "~/types/bundle";
+import db from "../db.server";
+import type { BundleFormData } from "../types/bundle";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { session } = await authenticate.admin(request);

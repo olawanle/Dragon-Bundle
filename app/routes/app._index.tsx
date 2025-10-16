@@ -8,8 +8,8 @@ import { useFetcher, useNavigate } from "react-router";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
 import { boundary } from "@shopify/shopify-app-react-router/server";
-import { BundleService } from "~/services/bundleService";
-import type { Bundle } from "~/types/bundle";
+import { BundleService } from "../services/bundleService";
+import type { Bundle } from "../types/bundle";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
