@@ -6,10 +6,19 @@ import { AppProvider } from "@shopify/shopify-app-react-router/react";
 import { authenticate } from "../shopify.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  await authenticate.admin(request);
-
-  // eslint-disable-next-line no-undef
-  return { apiKey: process.env.SHOPIFY_API_KEY || "" };
+  try {
+    await authenticate.admin(request);
+    // eslint-disable-next-line no-undef
+    return { apiKey: process.env.SHOPIFY_API_KEY || "" };
+  } catch (error) {
+    // If authentication fails, redirect to login
+    const url = new URL(request.url);
+    const shop = url.searchParams.get("shop");
+    if (shop) {
+      throw redirect(`/auth/login?shop=${shop}`);
+    }
+    throw redirect("/");
+  }
 };
 
 export default function App() {

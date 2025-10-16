@@ -8,11 +8,18 @@ import styles from "./styles.module.css";
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
 
+  // If there's a shop parameter (from Shopify admin), redirect to app
   if (url.searchParams.get("shop")) {
     throw redirect(`/app?${url.searchParams.toString()}`);
   }
 
-  return { showForm: Boolean(login) };
+  // If there's a host parameter (embedded app), redirect to app
+  if (url.searchParams.get("host")) {
+    throw redirect(`/app?${url.searchParams.toString()}`);
+  }
+
+  // Only show the login form for direct access (not from Shopify admin)
+  return { showForm: true };
 };
 
 export default function App() {
