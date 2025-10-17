@@ -12,13 +12,23 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       console.error("Missing required environment variables: SHOPIFY_API_KEY or SHOPIFY_API_SECRET");
       return { 
         apiKey: process.env.SHOPIFY_API_KEY || "",
+        host: "",
         error: "Configuration Error: Missing Shopify credentials. Please check your .env file."
       };
     }
 
     await authenticate.admin(request);
+    
+    // Get host from URL params for App Bridge
+    const url = new URL(request.url);
+    const host = url.searchParams.get("host") || "";
+    
     // eslint-disable-next-line no-undef
-    return { apiKey: process.env.SHOPIFY_API_KEY || "", error: null };
+    return { 
+      apiKey: process.env.SHOPIFY_API_KEY || "", 
+      host,
+      error: null 
+    };
   } catch (error) {
     console.error("Authentication error:", error);
     // If authentication fails, redirect to login
@@ -32,7 +42,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function App() {
-  const { apiKey, error } = useLoaderData<typeof loader>();
+  const { apiKey, host, error } = useLoaderData<typeof loader>();
 
   // If there's a configuration error, show it prominently
   if (error) {
