@@ -7,10 +7,20 @@ import { authenticate } from "../shopify.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   try {
+    // Check if required environment variables are set
+    if (!process.env.SHOPIFY_API_KEY || !process.env.SHOPIFY_API_SECRET) {
+      console.error("Missing required environment variables: SHOPIFY_API_KEY or SHOPIFY_API_SECRET");
+      return { 
+        apiKey: process.env.SHOPIFY_API_KEY || "",
+        error: "Configuration Error: Missing Shopify credentials. Please check your .env file."
+      };
+    }
+
     await authenticate.admin(request);
     // eslint-disable-next-line no-undef
-    return { apiKey: process.env.SHOPIFY_API_KEY || "" };
+    return { apiKey: process.env.SHOPIFY_API_KEY || "", error: null };
   } catch (error) {
+    console.error("Authentication error:", error);
     // If authentication fails, redirect to login
     const url = new URL(request.url);
     const shop = url.searchParams.get("shop");
@@ -22,7 +32,43 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function App() {
-  const { apiKey } = useLoaderData<typeof loader>();
+  const { apiKey, error } = useLoaderData<typeof loader>();
+
+  // If there's a configuration error, show it prominently
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-red-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+              <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Unable to Connect to Shopify</h1>
+          </div>
+          <div className="space-y-4">
+            <p className="text-red-600 dark:text-red-400 font-medium">{error}</p>
+            <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 space-y-3">
+              <h2 className="font-semibold text-gray-900 dark:text-white">To fix this issue:</h2>
+              <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                <li>Go to your Shopify Partner Dashboard at <a href="https://partners.shopify.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">partners.shopify.com</a></li>
+                <li>Find your app and copy the <strong>API Secret Key</strong></li>
+                <li>Open the <code className="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">.env</code> file in your project</li>
+                <li>Replace <code className="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">your_api_secret_here</code> with your actual API Secret</li>
+                <li>Restart your development server</li>
+              </ol>
+            </div>
+            <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Need help? Check the <code className="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">REAL_SHOPIFY_SETUP.md</code> file for detailed setup instructions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <AppProvider embedded apiKey={apiKey}>
