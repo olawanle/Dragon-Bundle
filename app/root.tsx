@@ -1,5 +1,16 @@
+import type { HeadersFunction, LoaderFunctionArgs } from "react-router";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { addSecurityHeaders } from "./middleware.server";
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  return {};
+};
+
+export const headers: HeadersFunction = ({ loaderHeaders }) => {
+  const headers = new Headers(loaderHeaders);
+  return headers;
+};
 
 export default function App() {
   return (
