@@ -5,6 +5,7 @@ import { createReadableStreamFromReadable } from "@react-router/node";
 import { type EntryContext } from "react-router";
 import { isbot } from "isbot";
 import { addDocumentResponseHeaders } from "./shopify.server";
+import { addSecurityHeaders } from "./middleware.server";
 
 export const streamTimeout = 5000;
 
@@ -14,7 +15,11 @@ export default async function handleRequest(
   responseHeaders: Headers,
   reactRouterContext: EntryContext
 ) {
+  // Add Shopify-specific headers
   addDocumentResponseHeaders(request, responseHeaders);
+  
+  // Add CSP headers to allow embedding in Shopify admin
+  addSecurityHeaders(request, responseHeaders);
   const userAgent = request.headers.get("user-agent");
   const callbackName = isbot(userAgent ?? '')
     ? "onAllReady"
